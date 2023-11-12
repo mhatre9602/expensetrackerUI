@@ -9,7 +9,7 @@ export default function Leaderboard() {
     let config = {
       method: "get",
       maxBodyLength: Infinity,
-      url: "http://localhost:3001/premium/showLeaderBoard",
+      url: "https://friendly-goat-kerchief.cyclic.app/premium/showLeaderBoard",
       headers: { Authorization: token },
     };
 

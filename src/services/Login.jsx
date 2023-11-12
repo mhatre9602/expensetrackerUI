@@ -20,7 +20,7 @@ export default function Login() {
     let config = {
       method: "post",
       maxBodyLength: Infinity,
-      url: "http://localhost:3001/user/login",
+      url: "https://friendly-goat-kerchief.cyclic.app/user/login",
       headers: {
         "Content-Type": "application/json",
       }, 

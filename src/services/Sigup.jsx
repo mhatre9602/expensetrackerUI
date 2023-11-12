@@ -23,7 +23,7 @@ export default function Signup() {
     let config = {
       method: "post",
       maxBodyLength: Infinity,
-      url: "http://localhost:3001/user/signup",
+      url: "https://friendly-goat-kerchief.cyclic.app/user/signup",
       headers: {
         "Content-Type": "application/json",
       },

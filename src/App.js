@@ -11,7 +11,7 @@ import Forgotpassword from "./services/Forgotpassword";
 import Resetpasswordform from "./services/Resetpasswordform";
 // https://codesandbox.io/p/sandbox/goofy-dawn-k9q46q?file=%2Futils%2Fdatabase.js%3A5%2C44
 
-export const API_BASE_URL = "http://localhost:3001";
+export const API_BASE_URL = "https://friendly-goat-kerchief.cyclic.app";
 
 //decode jwt
 function parseJwt(tk) {

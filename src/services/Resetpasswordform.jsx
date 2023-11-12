@@ -24,7 +24,7 @@ useEffect(() => {
         let config = {
             method: "patch",
             maxBodyLength: Infinity,
-            url: "http://localhost:3001/user/password/updatepassword"+pathName,
+            url: "https://friendly-goat-kerchief.cyclic.app/user/password/updatepassword"+pathName,
             headers: {
                 "Authorization":tok,
               "Content-Type": "application/json",

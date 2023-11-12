@@ -11,7 +11,7 @@ export default function Forgotpassword(){
         let config = {
             method: "post",
             maxBodyLength: Infinity,
-            url: "http://localhost:3001/user/password/forgotpassword",
+            url: "https://friendly-goat-kerchief.cyclic.app/user/password/forgotpassword",
             headers: {
               "Content-Type": "application/json",
             },

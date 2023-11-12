@@ -25,7 +25,7 @@ export default () => {
     let config = {
       method: "post",
       maxBodyLength: Infinity,
-      url: "http://localhost:3001/expense/addexpense",
+      url: "https://friendly-goat-kerchief.cyclic.app/expense/addexpense",
       headers: {
         Authorization: token,
         "Content-Type": "application/json",
@@ -65,7 +65,7 @@ export default () => {
     let config = {
       method: "delete",
       maxBodyLength: Infinity,
-      url: "http://localhost:3001/expense/deleteexpense/" + expenseid,
+      url: "https://friendly-goat-kerchief.cyclic.app/expense/deleteexpense/" + expenseid,
       headers: {
         Authorization: token,
       },
@@ -101,7 +101,7 @@ export default () => {
     let config = {
       method: "get",
       maxBodyLength: Infinity,
-      url: "http://localhost:3001/expense/getexpenses",
+      url: "https://friendly-goat-kerchief.cyclic.app/expense/getexpenses",
       headers: { Authorization: token },
     };
 
