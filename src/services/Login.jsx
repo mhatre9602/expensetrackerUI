@@ -6,7 +6,7 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  function onLogin() {
+  async function onLogin() {
     if (!(email.length && password.length)) {
       window.alert("Please fill all details.");
       return;
@@ -27,7 +27,7 @@ export default function Login() {
       data: data,
     };
 
-    axios
+    await axios
       .request(config)
       .then((response) => {
         console.log("login Response message",response);
