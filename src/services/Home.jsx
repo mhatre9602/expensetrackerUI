@@ -10,7 +10,7 @@ export default () => {
   }, []);
 
   const userId = localStorage.getItem("token");
-  if (!userId) window.location.pathname = "/user/login";
+  if (!userId) window.location.pathname = "/";
 
   const [expenses, setExpenses] = useState([]);
 
