@@ -60,7 +60,14 @@ const App = () => {
 
             <NavLink
               className="link"
-              to="/reports"
+              // to="/reports"
+              onClick={() => {
+                if (!checkPremium) {
+                  alert("You must be a premium user to access this feature");
+                } else {
+                  window.location.pathname = "/reports";
+                }
+              }}
               style={({ isActive }) => {
                 return isActive ? { color: "black", fontWeight: "bold" } : {};
               }}
@@ -107,7 +114,7 @@ const App = () => {
                         "You are a premium user, please re-login to use features"
                       );
                       localStorage.removeItem("token");
-                      window.location.pathname = "/user/login";
+                      window.location.pathname = "/";
                     },
                   };
                   const rzp1 = new window.Razorpay(options);
@@ -128,16 +135,33 @@ const App = () => {
             ) : (
               ""
             )}
-            {checkPremium ? <NavLink className="link">Premium</NavLink> : ""}
-            <NavLink
-              className="link"
-              to="/premium/leaderboard"
-              style={({ isActive }) => {
-                return isActive ? { color: "black", fontWeight: "bold" } : {};
-              }}
-            >
-              Leaderboards
-            </NavLink>
+            {checkPremium ? (
+              <NavLink className="link" style={{ color: "green" }}>
+                Premium User Account
+              </NavLink>
+            ) : (
+              ""
+            )}
+            {checkPremium ? (
+              <NavLink
+                className="link"
+                to="/premium/leaderboard"
+                style={({ isActive }) => {
+                  return isActive ? { color: "black", fontWeight: "bold" } : {};
+                }}
+              >
+                Leaderboards
+              </NavLink>
+            ) : (
+              <NavLink
+                className="link"
+                onClick={() => {
+                  alert("You must be a premium user to access this feature");
+                }}
+              >
+                Leaderboard
+              </NavLink>
+            )}
           </>
         ) : (
           <>

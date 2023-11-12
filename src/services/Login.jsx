@@ -23,7 +23,7 @@ export default function Login() {
       url: "http://localhost:3001/user/login",
       headers: {
         "Content-Type": "application/json",
-      },
+      }, 
       data: data,
     };
 

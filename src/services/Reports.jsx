@@ -8,8 +8,7 @@ export default function Reports() {
   const [start, setStart] = useState(null);
   const [end, setEnd] = useState(null);
   const tk = localStorage.getItem("token");
-  if (!tk) window.location.pathname = "/user/login";
-
+  if (!tk) window.location.pathname = "/";
 
   //JWT verify
   function parseJwt(tk) {
@@ -24,22 +23,22 @@ export default function Reports() {
         })
         .join("")
     );
-  
+
     return JSON.parse(jsonPayload);
   }
-
 
   useEffect(() => {
     getExpenseForUser();
   }, []);
 
   function getExpenseForUser(type) {
+    console.log(type, start);
     let config = {
       method: "get",
       maxBodyLength: Infinity,
       url: `http://localhost:3001/expense/getexpenses?type=${type}&start=${
         start || ""
-      }&end=${end || ""}`,
+      }`,
       headers: {
         Authorization: localStorage.getItem("token"),
         "Content-Type": "application/json",
@@ -53,6 +52,28 @@ export default function Reports() {
         console.log(JSON.stringify(response.data));
       })
       .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  function downloadReports(type) {
+    let config = {
+      method: "get",
+      maxBodyLength: Infinity,
+      url: `http://localhost:3001/expense/download?type=${type}&start=${
+        start || ""
+      }`,
+      headers: { Authorization: localStorage.getItem("token") },
+    };
+
+    axios
+      .request(config)
+      .then((response) => {
+        alert("File download");
+        console.log(JSON.stringify(response));
+      })
+      .catch((error) => {
+        alert("Error occured");
         console.log(error);
       });
   }
@@ -93,6 +114,44 @@ export default function Reports() {
             >
               Show
             </a>
+            <button
+              className="btn m-1 btn-large"
+              onClick={() => downloadReports("daily")}
+            >
+              <i className="fa fa-download" aria-hidden="true"></i>
+            </button>
+          </div>
+          <ExpenseHistoryTable data={expenses} />
+        </div>
+      </div>
+
+      {/*Weekly*/}
+      <div className="daily_report w-100">
+        <div className="card" style={{ width: "100%" }}>
+          {/* <img src="..." class="card-img-top" alt="..."> */}
+          <div className="card-body">
+            <h5 className="card-title">Weekly Reports</h5>
+            <p className="card-text">Select Date</p>
+            <input
+              onChange={(e) => setStart(e.target.value)}
+              className="m-2 p-2"
+              type="date"
+            />
+            <a
+              href="#"
+              className="btn btn-primary"
+              onClick={() => {
+                getExpenseForUser("weekly");
+              }}
+            >
+              Show
+            </a>
+            <button
+              className="btn m-1 btn-large"
+              onClick={() => downloadReports("weekly")}
+            >
+              <i className="fa fa-download" aria-hidden="true"></i>
+            </button>
           </div>
           <ExpenseHistoryTable data={expenses} />
         </div>
@@ -124,6 +183,12 @@ export default function Reports() {
             >
               Show
             </a>
+            <button
+              className="btn m-1 btn-large"
+              onClick={() => downloadReports("monthly")}
+            >
+              <i className="fa fa-download" aria-hidden="true"></i>
+            </button>
           </div>
           <ExpenseHistoryTable data={expenses} />
         </div>
