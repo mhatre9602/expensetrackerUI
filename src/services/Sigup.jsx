@@ -1,13 +1,16 @@
 import { useState } from "react";
-import { API_BASE_URL } from "../App";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { API_BASE_URL } from "../App";
 
 export default function Signup() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
-  function onSignup() {
+  function onSignup(e) {
+    e?.preventDefault();
     if (!(name.length && email.length && password.length)) {
       window.alert("Please fill all details.");
       return;
@@ -19,7 +22,6 @@ export default function Signup() {
       password,
     });
 
-    console.log(data);
     let config = {
       method: "post",
       maxBodyLength: Infinity,
@@ -33,30 +35,11 @@ export default function Signup() {
     axios
       .request(config)
       .then((response) => {
-        // console.log(JSON.stringify(response.data));
-        alert(response.data.message);
-        window.location.pathname = "/";
+        navigate("/");
       })
       .catch((error) => {
         console.log(error);
       });
-
-    // fetch(API_BASE_URL + "/sign-up", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     name,
-    //     email,
-    //     password,
-    //   }),
-    // })
-    //   .then((response) => {
-    //     // window.alert("Welcome to our site! Please login to continue.");
-    //     window.location.pathname = "/login";
-    //   })
-    //   .catch((err) => window.alert("Oops! Something went wrong!"));
   }
 
   return (
