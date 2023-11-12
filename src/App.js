@@ -89,7 +89,7 @@ const App = () => {
                 className="link"
                 onClick={async (e) => {
                   const response = await axios.get(
-                    "http://localhost:3001/purchase/premiummembership",
+                    "https://friendly-goat-kerchief.cyclic.app/purchase/premiummembership",
                     {
                       headers: { Authorization: localStorage.getItem("token") },
                     }
@@ -99,7 +99,7 @@ const App = () => {
                     order_id: response.data.order.id,
                     handler: async function (response) {
                       await axios.post(
-                        "http://localhost:3001/purchase/updatetransactionstatus",
+                        "https://friendly-goat-kerchief.cyclic.app/purchase/updatetransactionstatus",
                         {
                           order_id: options.order_id,
                           payment_id: response.razorpay_payment_id,
