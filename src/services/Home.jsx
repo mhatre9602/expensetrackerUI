@@ -3,14 +3,16 @@ import React, { useState, useEffect } from "react";
 import CreateExpense from "./ExpenseEntry";
 import ExpenseHistoryTable from "./ExpenseHistory";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-export default () => {
+export default function Home() {
+  const navigate = useNavigate()
   useEffect(() => {
     getExpenseForUser();
   }, []);
 
   const userId = localStorage.getItem("token");
-  if (!userId) window.location.pathname = "/";
+  if (!userId) navigate("/")
 
   const [expenses, setExpenses] = useState([]);
 

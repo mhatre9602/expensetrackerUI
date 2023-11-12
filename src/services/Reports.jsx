@@ -2,13 +2,15 @@ import { useEffect, useState } from "react";
 import ExpenseHistoryTable from "./ExpenseHistory";
 import { API_BASE_URL } from "../App";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function Reports() {
+  const navigate = useNavigate()
   const [expenses, setExpenses] = useState([]);
   const [start, setStart] = useState(null);
   const [end, setEnd] = useState(null);
   const tk = localStorage.getItem("token");
-  if (!tk) window.location.pathname = "/";
+  if (!tk) navigate("/");
 
   //JWT verify
   function parseJwt(tk) {

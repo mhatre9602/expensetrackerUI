@@ -16,7 +16,6 @@ useEffect(() => {
 }, [location])
 
     function updatePassword(){
-        console.log(window.location.pathname)
         let data = JSON.stringify({
             password
           });

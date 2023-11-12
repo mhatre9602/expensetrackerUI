@@ -1,12 +1,15 @@
 import { useState } from "react";
-import { API_BASE_URL } from "../App";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { API_BASE_URL } from "../App";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
-  async function onLogin() {
+  async function onLogin(e) {
+    e?.preventDefault();
     if (!(email.length && password.length)) {
       window.alert("Please fill all details.");
       return;
@@ -20,7 +23,7 @@ export default function Login() {
     let config = {
       method: "post",
       maxBodyLength: Infinity,
-      url: "https://friendly-goat-kerchief.cyclic.app/user/login",
+      url: `${API_BASE_URL}/user/login`,
       headers: {
         "Content-Type": "application/json",
       }, 
@@ -30,10 +33,8 @@ export default function Login() {
     await axios
       .request(config)
       .then((response) => {
-        console.log("login Response message",response);
         localStorage.setItem("token", response.data.token);
-        window.location.pathname = "/home";
-        // console.log(JSON.stringify(response.data));
+        navigate("/home");
       })
       .catch((error) => {
         console.log(error);

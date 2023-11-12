@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { NavLink, Routes, Route } from "react-router-dom";
+import React from "react";
+import { NavLink, Routes, Route, useNavigate } from "react-router-dom";
 import Home from "./services/Home";
 import Login from "./services/Login";
 import Signup from "./services/Sigup";
@@ -31,6 +31,7 @@ function parseJwt(tk) {
 }
 
 const App = () => {
+  const navigate = useNavigate()
   const userId = localStorage.getItem("token");
   let checkPremium;
   if (userId) {
@@ -52,7 +53,7 @@ const App = () => {
               }}
               onClick={() => {
                 localStorage.removeItem("token");
-                window.location.pathname = "/";
+                navigate("/")
               }}
             >
               Log out
@@ -65,7 +66,7 @@ const App = () => {
                 if (!checkPremium) {
                   alert("You must be a premium user to access this feature");
                 } else {
-                  window.location.pathname = "/reports";
+                  navigate("/reports")
                 }
               }}
               style={({ isActive }) => {
@@ -114,7 +115,7 @@ const App = () => {
                         "You are a premium user, please re-login to use features"
                       );
                       localStorage.removeItem("token");
-                      window.location.pathname = "/";
+                      navigate("/")
                     },
                   };
                   const rzp1 = new window.Razorpay(options);
