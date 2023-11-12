@@ -36,7 +36,7 @@ export default function Reports() {
     let config = {
       method: "get",
       maxBodyLength: Infinity,
-      url: `http://localhost:3001/expense/getexpenses?type=${type}&start=${
+      url: `${API_BASE_URL}/expense/getexpenses?type=${type}&start=${
         start || ""
       }`,
       headers: {
@@ -64,7 +64,7 @@ export default function Reports() {
     let config = {
       method: "get",
       maxBodyLength: Infinity,
-      url: `http://localhost:3001/expense/download?type=${type}&start=${
+      url: `${API_BASE_URL}/expense/download?type=${type}&start=${
         start || ""
       }`,
       headers: { Authorization: localStorage.getItem("token") },
