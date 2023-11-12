@@ -30,8 +30,7 @@ export default function Login() {
     axios
       .request(config)
       .then((response) => {
-        alert(response.data.message);
-        // console.log(response.data);
+        console.log("login Response message",response);
         localStorage.setItem("token", response.data.token);
         window.location.pathname = "/home";
         // console.log(JSON.stringify(response.data));
