@@ -2,15 +2,13 @@ import { useEffect, useState } from "react";
 import ExpenseHistoryTable from "./ExpenseHistory";
 import { API_BASE_URL } from "../App";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 export default function Reports() {
-  const navigate = useNavigate()
   const [expenses, setExpenses] = useState([]);
   const [start, setStart] = useState(null);
   const [end, setEnd] = useState(null);
   const tk = localStorage.getItem("token");
-  if (!tk) navigate("/");
+  if (!tk) window.location.pathname = "/";
 
   //JWT verify
   function parseJwt(tk) {
@@ -38,7 +36,7 @@ export default function Reports() {
     let config = {
       method: "get",
       maxBodyLength: Infinity,
-      url: `https://friendly-goat-kerchief.cyclic.app/expense/getexpenses?type=${type}&start=${
+      url: `http://localhost:3001/expense/getexpenses?type=${type}&start=${
         start || ""
       }`,
       headers: {
@@ -58,11 +56,15 @@ export default function Reports() {
       });
   }
 
+  const openInNewTab = (url) => {
+    window.open(url, "_blank", "noreferrer");
+  };
+
   function downloadReports(type) {
     let config = {
       method: "get",
       maxBodyLength: Infinity,
-      url: `https://friendly-goat-kerchief.cyclic.app/expense/download?type=${type}&start=${
+      url: `http://localhost:3001/expense/download?type=${type}&start=${
         start || ""
       }`,
       headers: { Authorization: localStorage.getItem("token") },
@@ -72,27 +74,14 @@ export default function Reports() {
       .request(config)
       .then((response) => {
         alert("File download");
-        console.log(JSON.stringify(response));
+        openInNewTab(response.data.reportUrl);
+        // console.log(JSON.stringify(response));
       })
       .catch((error) => {
         alert("Error occured");
         console.log(error);
       });
   }
-
-  //   fetch(
-  //     `${API_BASE_URL}/expense/getexpenses?type=${type}&start=${
-  //       start || ""
-  //     }&end=${end || ""}`,
-  //     {
-  //       headers: { Authorization: id },
-  //     }
-  //   )
-  //     .then((res) => setExpenses(res.data.expenses))
-  //     .catch((err) =>
-  //       window.alert(`Oops! Something went wrong! Error: ${err?.message}`)
-  //     );
-  // }
 
   return (
     <section className="mx-2">
