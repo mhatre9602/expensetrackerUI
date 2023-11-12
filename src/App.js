@@ -36,7 +36,6 @@ const App = () => {
   let checkPremium;
   if (userId) {
     const decodeToken = parseJwt(userId);
-    console.log("decode", decodeToken);
     checkPremium = decodeToken.ispremiumuser;
   }
 
@@ -62,7 +61,8 @@ const App = () => {
             <NavLink
               className="link"
               // to="/reports"
-              onClick={() => {
+              onClick={(e) => {
+                e?.preventDefault();
                 if (!checkPremium) {
                   alert("You must be a premium user to access this feature");
                 } else {
@@ -88,6 +88,7 @@ const App = () => {
               <NavLink
                 className="link"
                 onClick={async (e) => {
+                  e?.preventDefault();
                   const response = await axios.get(
                     "http://localhost:3001/purchase/premiummembership",
                     {
