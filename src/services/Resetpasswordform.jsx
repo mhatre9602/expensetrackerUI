@@ -54,7 +54,9 @@ useEffect(() => {
           </div>
          
           <div className="col-12">
-            <button className="btn btn-primary" onClick={updatePassword}>
+            <button className="btn btn-primary" onClick={(e)=>{
+              e?.preventDefault();
+              updatePassword()}}>
               Reset Password
             </button>
           </div>
