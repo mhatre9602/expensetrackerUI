@@ -42,7 +42,10 @@ export default function Forgotpassword(){
             </div>
            
             <div className="col-12">
-              <button className="btn btn-primary" onClick={resetPassword}>
+              <button className="btn btn-primary" onClick={(e)=>{
+                e?.preventDefault();
+                resetPassword()
+              }}>
                 Send Reset Link
               </button>
             </div>
